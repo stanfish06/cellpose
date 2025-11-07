@@ -15,12 +15,14 @@ logging.disable(logging.CRITICAL)
 # default cellpose sam
 model_kwargs = {"gpu": True}
 eval_kwargs = {"z_axis": 0, "do_3D": True}
+# Do not use GPFS filesystem for logging as it gave me stale file handle problem
 cluster_kwargs = {
     "cores": 2,
     "min_workers": 1,
     "max_workers": 16,
     "walltime": "1:00:00",
     "queue": "gpu",
+    "log_directory": "/home/zyyu/",
     "job_extra_directives": [
         "--gres=gpu:1",
     ],
