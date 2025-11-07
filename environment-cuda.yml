@@ -1,0 +1,41 @@
+name: cellpose
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.9.23
+  - pip
+  - pip:
+    # PyTorch with CUDA support (change cu118 to cu121 if you have CUDA 12.x)
+    - --index-url https://download.pytorch.org/whl/cu118
+    - --extra-index-url https://pypi.org/simple
+    - torch>=2.0.0
+    - torchvision
+    - torchaudio
+    # UI and visualization
+    - qtpy
+    - pyqt5
+    - pyqtgraph>=0.11.0rc0
+    # Core dependencies
+    - numpy>=1.20.0
+    - scipy
+    - opencv-python-headless
+    - natsort
+    - tqdm
+    - tifffile
+    - roifile
+    - pyyaml
+    # Cellpose and related
+    - cellpose
+    - fastremap
+    - fill-voids
+    # Dask for distributed computing
+    - dask
+    - distributed
+    - dask-image
+    - dask-jobqueue
+    - zarr
+    - bokeh
+    - aiohttp
+    # Cloud storage (if needed)
+    - google-cloud-storage
