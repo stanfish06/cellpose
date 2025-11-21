@@ -622,7 +622,10 @@ def read_preprocess_and_segment(
     if worker_logs_directory is not None:
         log_file = f'dask_worker_{distributed.get_worker().name}.log'
         log_file = pathlib.Path(worker_logs_directory).joinpath(log_file)
-    cellpose.io.logger_setup(stdout_file_replacement=log_file)
+    try:
+        cellpose.io.logger_setup(stdout_file_replacement=log_file)
+    except OSError:
+        print("failed to start logger")
     model = cellpose.models.CellposeModel(**model_kwargs)
     return model.eval(image, **eval_kwargs)[0].astype(np.uint32)
 

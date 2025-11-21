@@ -20,17 +20,23 @@ def main():
 
     # Cluster parameters (example: https://docs.mpcdf.mpg.de/doc/computing/viper-gpu-user-guide.html)
     cluster_kwargs = {
-        'job_cpu': 2,               # number of CPUs per GPU worker
+        'job_cpu': 4,               # number of CPUs per GPU worker
         'ncpus':1,                  # threads requested per GPU worker
         'min_workers':1,            # min number of workers based on expected workload
-        'max_workers':16,           # max number of workers based on expected workload 
-        'walltime': '1:00:00',      # available runtime for each GPU worker for cluster scheduler (Slurm, LSF)
-        'queue': 'apu',             # queue/ partition name for single GPU worker *
-        'interface': 'ib0',         # interface name for compute-node communication *
-        'local_directory': '/tmp',  # compute node local temporary directory *
-        'job_extra_directives': [   # extra directives for scheduler (here: Slurm) *
-            '--constraint apu',
-            '--gres gpu:1',
+        'max_workers':4,           # max number of workers based on expected workload 
+        'walltime': '2:00:00',      # available runtime for each GPU worker for cluster scheduler (Slurm, LSF)
+        # 'queue': 'apu',             # queue/ partition name for single GPU worker *
+        # 'interface': 'ib0',         # interface name for compute-node communication *
+        # 'local_directory': '/tmp',  # compute node local temporary directory *
+        # 'job_extra_directives': [   # extra directives for scheduler (here: Slurm) *
+        #     '--constraint apu',
+        #     '--gres gpu:1',
+        # ], 
+        "queue": "spgpu",                                                               
+        'local_directory': '/home/zyyu/',
+        "log_directory": "/home/zyyu/",                                                     
+        "job_extra_directives": [                                                           
+             "--gres=gpu:1",                                                                 
         ],
     }
     # * Ask your cluster support staff for assistance
